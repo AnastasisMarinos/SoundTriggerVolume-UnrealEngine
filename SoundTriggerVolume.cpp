@@ -2,9 +2,10 @@
  
  
  #include "Interactables/SoundTriggerActor.h"
- 
- #include "Character/PlayerCharacter.h"
- 
+ #include "GameFramework/SpringArmComponent.h"
+ #include "GameFramework/Actor.h"
+
+
  // INITIALIZE ACTOR //
  ASoundTriggerActor::ASoundTriggerActor()
  {
@@ -15,7 +16,6 @@
  	CollisionBoxScale = FVector(100.f, 100.f, 100.f);
  	
  	// SOUND SYSTEM //
- 	AC_AwayLocation = FVector(500.f, 0.f, 0.f);
  	bPlayedSound = false;
  	bCanBeReplayed = false;
  
@@ -39,11 +39,15 @@
  	AC_InPlace = CreateDefaultSubobject<UAudioComponent>(FName("AC_InPlace"));
  	AC_InPlace->SetupAttachment(DefaultSceneRoot);
  	AC_InPlace->SetRelativeLocation(FVector(0.0f,0.0f, 180.0f));
+
+ 	// Initialize spring arm
+ 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArmComp"));
+ 	SpringArm->SetupAttachment(AC_InPlace);
+ 	SpringArm->TargetArmLength = 300.f;
  	
  	// Initialize the away audio component
  	AC_Away = CreateDefaultSubobject<UAudioComponent>(FName("AC_Away"));
- 	AC_Away->SetupAttachment(DefaultSceneRoot);
- 	AC_Away->SetRelativeLocation(AC_AwayLocation);
+ 	AC_Away->SetupAttachment(SpringArm);
  
  }
  
