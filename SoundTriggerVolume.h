@@ -1,4 +1,4 @@
-// (C)EVOLV //
+// (C)EVOLV 2023 //
 
 #pragma once
 
@@ -26,9 +26,7 @@ public:
 
 	// AUDIO COMPONENTS //
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	UAudioComponent* AC_InPlace;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	UAudioComponent* AC_Away;
+	UAudioComponent* AudioComponent;
 	
 public:	
 	// Initializes the actor
@@ -41,10 +39,15 @@ protected:
 	UFUNCTION()
 	void OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
 
+	virtual void PostEditChangeProperty (FPropertyChangedEvent & PropertyChangedEvent) override;
+
 	// INTERACTION SYSTEM //
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite , Category = "INTERACTION SYSTEM")
 	FVector CollisionBoxScale;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite , Category = "INTERACTION SYSTEM")
+	float AudioSourceLength;
 
 	// SOUND SYSTEM //
 	
@@ -52,12 +55,6 @@ protected:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite , Category = "SOUND SYSTEM")
 	bool bCanBeReplayed;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite , Category = "SOUND SYSTEM")
-	bool bPlayInPlace;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite , Category = "SOUND SYSTEM")
-	bool bPlayAway;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite , Category = "SOUND SYSTEM")
 	USoundBase* SoundEffect;
