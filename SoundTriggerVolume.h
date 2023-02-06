@@ -13,17 +13,21 @@ class AICON_API ASoundTriggerActor : public AActor
 {
 	GENERATED_BODY()
 
+public:
 	// INTERACTION COMPONENTS //
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	USceneComponent* DefaultSceneRoot;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	class USpringArmComponent* SpringArm;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	UBoxComponent* CollisionMesh;
 
 	// AUDIO COMPONENTS //
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	UAudioComponent* AC_InPlace;
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	UAudioComponent* AC_Away;
 	
 public:	
@@ -45,9 +49,6 @@ protected:
 	// SOUND SYSTEM //
 	
 	bool bPlayedSound;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite , Category = "SOUND SYSTEM")
-	FVector AC_AwayLocation;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite , Category = "SOUND SYSTEM")
 	bool bCanBeReplayed;
