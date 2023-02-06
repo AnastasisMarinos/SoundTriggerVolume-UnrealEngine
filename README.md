@@ -7,7 +7,6 @@ First you'll need to create a public c++ actor class and name it "SoundTriggerVo
 When it compiles copy and paste the .h and .cpp code in their respected scripts in your IDE.
 Compile and re-launch Unreal Engine.
 And the class will be ready for you to drag into your level and configure the default properties.
-You can also change the length of the Spring Arm to configure how far away the sound will play.
 If you edit other parameters that are not exposed (e.x. Pitch Level) right click the c++ class and create a blueprint class based on it
 
 Info:
