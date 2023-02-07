@@ -3,7 +3,7 @@ Simple C++ Actor Volume That Triggers A Sound Cue.
 
 Implementation:
 
-First you'll need to create a public c++ actor class and name it "SoundTriggerVolume"
+First you'll need to create a public c++ actor class name it "SoundTriggerVolume" and place it in preferably a "Volumes" Folder.
 When it compiles copy and paste the .h and .cpp code in their respected scripts in your IDE.
 Compile and re-launch Unreal Engine.
 And the class will be ready for you to drag into your level and configure the default properties.
