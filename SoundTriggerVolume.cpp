@@ -1,13 +1,13 @@
 // (C)EVOLV 2023 //
  
  
- #include "Interactables/SoundTriggerActor.h"
+ #include "Volumes/SoundTriggerVolume.h"
  #include "GameFramework/SpringArmComponent.h"
  #include "GameFramework/Actor.h"
 
 
  // INITIALIZE ACTOR //
- ASoundTriggerActor::ASoundTriggerActor()
+ ASoundTriggerVolume::ASoundTriggerVolume()
  {
   	// Can Tick?
  	PrimaryActorTick.bCanEverTick = false;
@@ -36,14 +36,14 @@
  	SpringArm->SetRelativeLocation(FVector(0.0f, 0.0f, 180.0f));
  	SpringArm->TargetArmLength = AudioSourceLength;
  	
- 	// Initialize the away audio component
- 	AudioComponent = CreateDefaultSubobject<UAudioComponent>(FName("AC_Away"));
+ 	// Initialize the audio component
+ 	AudioComponent = CreateDefaultSubobject<UAudioComponent>(FName("AudioComponent"));
  	AudioComponent->SetupAttachment(SpringArm);
  
  }
 
 // HANDLE PROPERTY CHANGES IN LEVEL DESIGNER //
-void ASoundTriggerActor::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
+void ASoundTriggerVolume::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
 {
  	Super::PostEditChangeProperty(PropertyChangedEvent);
 
@@ -53,11 +53,11 @@ void ASoundTriggerActor::PostEditChangeProperty(FPropertyChangedEvent& PropertyC
 
  
  // WHEN THE GAME STARTS //
- void ASoundTriggerActor::BeginPlay()
+ void ASoundTriggerVolume::BeginPlay()
  {
  	Super::BeginPlay();
  	//Set up the collision system
- 	CollisionMesh->OnComponentBeginOverlap.AddDynamic(this,&ASoundTriggerActor::OverlapBegin);
+ 	CollisionMesh->OnComponentBeginOverlap.AddDynamic(this,&ASoundTriggerVolume::OverlapBegin);
 
  	//Set sound effect for the audio component
  	AudioComponent->SetSound(SoundEffect);
@@ -65,7 +65,7 @@ void ASoundTriggerActor::PostEditChangeProperty(FPropertyChangedEvent& PropertyC
  }
  
  // WHEN PLAYER INTERACTS WITH THE ACTOR //
- void ASoundTriggerActor::OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+ void ASoundTriggerVolume::OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
  	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
  {
  	// Trigger Sound Events
@@ -73,6 +73,11 @@ void ASoundTriggerActor::PostEditChangeProperty(FPropertyChangedEvent& PropertyC
  	{
  		if(!AudioComponent->IsPlaying())
  		{
+ 			AudioComponent->Play(0.0f);
+ 		}
+ 		else
+ 		{
+ 			AudioComponent->Stop();
  			AudioComponent->Play(0.0f);
  		}
  	}
