@@ -6,10 +6,10 @@
 #include "GameFramework/Actor.h"
 #include "Components/BoxComponent.h"
 #include "Components/AudioComponent.h"
-#include "SoundTriggerActor.generated.h"
+#include "SoundTriggerVolume.generated.h"
 
 UCLASS()
-class AICON_API ASoundTriggerActor : public AActor
+class AICON_API ASoundTriggerVolume : public AActor
 {
 	GENERATED_BODY()
 
@@ -30,7 +30,7 @@ public:
 	
 public:	
 	// Initializes the actor
-	ASoundTriggerActor();
+	ASoundTriggerVolume();
 
 protected:
 	// Called when the game starts
