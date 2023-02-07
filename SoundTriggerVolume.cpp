@@ -46,7 +46,7 @@
 void ASoundTriggerVolume::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
 {
  	Super::PostEditChangeProperty(PropertyChangedEvent);
-
+  //WARNING: COMMENT THESE PARAMS OUT BEFORE BUILDING THE GAME THEY ARE FOR IN-EDITOR USE ONLY!
  	CollisionMesh->SetBoxExtent(CollisionBoxScale);
  	SpringArm->TargetArmLength = AudioSourceLength;
 }
